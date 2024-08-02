@@ -101,11 +101,11 @@ export default function Home() {
   };
 
   const handleValidateInputFields = () => {
-    console.log("i am hwrw");
-    console.log("dfs", userInfo.businessname);
     if (!userInfo.businessname) return toast.error("Input Business Name");
     if (!userInfo.address) return toast.error("Input Business Address");
     if (!userInfo.bankname) return toast.error("Input Business Bank Name");
+    if (!userInfo.terms) return toast.error("Input Terms of invoice");
+    if (!selectedImage) return toast.error("Upload business logo");
     if (!userInfo.accountnumber)
       return toast.error("Input Business Account Number");
   };
