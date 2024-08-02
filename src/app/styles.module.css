@@ -394,10 +394,32 @@
   .body
   .invoice-content
   table
+  tbody
+  td:last-child {
+  text-align: right;
+}
+
+.invoice-create-container
+  .invoice-body-styles-container
+  .modern-invoice
+  .body
+  .invoice-content
+  table
   thead
-  th {
+  td {
   padding: 4px 9px;
   font-weight: 800;
+}
+
+.invoice-create-container
+  .invoice-body-styles-container
+  .modern-invoice
+  .body
+  .invoice-content
+  table
+  thead
+  td:last-child {
+  text-align: right;
 }
 
 .invoice-create-container

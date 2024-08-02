@@ -13,7 +13,7 @@ export function ModernInvoiceTemplate({
   return (
     <div className={styles["modern-invoice"]}>
       <div className={styles["logo-container"]}>
-        <Image src={image} alt='brand-logo' width={50} height={50} />
+        <Image src={image || ""} alt='brand-logo' width={50} height={50} />
       </div>
       <div
         className={styles["body"]}
@@ -49,16 +49,16 @@ export function ModernInvoiceTemplate({
         <div className={styles["invoice-content"]}>
           <table className='table'>
             <thead>
-              <th>Description</th>
-              <th>Rate</th>
-              <th>Quantity</th>
-              <th>Price</th>
+              <td>Description</td>
+              <td>Rate</td>
+              <td>Quantity</td>
+              <td>Price</td>
             </thead>
             <tbody>
               {services.map((el, key) => (
                 <tr key={key}>
                   <td style={{ color: customization.fontColor }}>
-                    {el.service}
+                    {el.service || "-"}
                   </td>
                   <td style={{ color: customization.fontColor }}>
                     USD {el.rate}

@@ -22,6 +22,7 @@ import {
 } from "next/font/google";
 import { useMemo, useState } from "react";
 import Image from "next/image";
+import { toast } from "react-toastify";
 
 const barlow = Barlow({
   subsets: ["latin"],
@@ -70,6 +71,11 @@ export default function Home() {
   };
 
   const handleAddServiceLine = () => {
+    const uncompletedServices = services.filter(
+      (el) => !el.service || !el.price || !el.quantity || !el.rate
+    );
+    if (uncompletedServices.length)
+      return toast.error("Complete any unfinished service row");
     setServices([...services, { service: "", rate: 0, price: 0, quantity: 0 }]);
   };
 
@@ -94,6 +100,20 @@ export default function Home() {
     }
   };
 
+  const handleValidateInputFields = () => {
+    console.log("i am hwrw");
+    console.log("dfs", userInfo.businessname);
+    if (!userInfo.businessname) return toast.error("Input Business Name");
+    if (!userInfo.address) return toast.error("Input Business Address");
+    if (!userInfo.bankname) return toast.error("Input Business Bank Name");
+    if (!userInfo.accountnumber)
+      return toast.error("Input Business Account Number");
+  };
+
+  const handleSaveInvoiceDraft = () => {
+    handleValidateInputFields();
+  };
+
   return (
     <main className={(pageStyles.main, roboto.className)}>
       <div className={styles["navbar-container"]}>
@@ -107,8 +127,8 @@ export default function Home() {
               <p>Create Invoice</p>
             </div>
             <div className={styles.actions}>
-              <button>Preview</button>
-              <button>Save as Draft</button>
+              {/* <button>Preview</button> */}
+              <button onClick={handleSaveInvoiceDraft}>Save as Draft</button>
               <button>Download Invoice</button>
             </div>
           </div>
@@ -155,7 +175,7 @@ export default function Home() {
                         {selectedImage ? (
                           <div className={styles["uploaded-image-container"]}>
                             <Image
-                              src={selectedImage}
+                              src={selectedImage || ""}
                               width={200}
                               height={180}
                               alt='brand-logo'
@@ -274,7 +294,7 @@ export default function Home() {
                             })
                           }
                         >
-                          <option disabled selected>
+                          <option disabled defaultValue={"minimal"}>
                             Select Invoice Format
                           </option>
                           <option value={"minimal"}>Minimal Invoice</option>
@@ -333,7 +353,7 @@ export default function Home() {
                             });
                           }}
                         >
-                          <option disabled selected>
+                          <option disabled defaultValue={"Select Font Style"}>
                             Select Font Style
                           </option>
                           <option value={"raleway"}>Raleway</option>
